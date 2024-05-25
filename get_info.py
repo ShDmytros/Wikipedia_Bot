@@ -75,7 +75,7 @@ class parsing:
         return clean_information + "\n" + self.new_url
 
     def parse_photo(self) -> str:
-        photo: str = str(self.selector.css('img').get(['src']))
+        photo: str = str(self.selector.css('.infobox img').get(['src']))
 
         photo_link = re.findall(r'".+"', photo)
 
@@ -109,7 +109,7 @@ class parsing:
 
 
 def main():
-    data = parsing(text="Дублін", lang="ua")
+    data = parsing(text="Львів", lang="ua")
 
     data_info: str = str(data.data_list)
     data_photo: str = str(data.photo)
