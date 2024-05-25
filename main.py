@@ -18,6 +18,8 @@ def welcome(message):
     item3 = types.KeyboardButton("/english")
     markup.add(item1, item2, item3)
 
+    # bot.send_photo(message.chat.id, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/%D0%91%D1%83%D0%B4%D0%B8%D0%BD%D0%BE%D0%BA_%D0%BA%D0%BE%D0%BB%D0%B8%D1%88%D0%BD%D1%8C%D0%BE%D1%97_%D0%A5%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%BC%D1%96%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%B4%D1%83%D0%BC%D0%B8_%28%D0%BC%D1%83%D1%80.%29.jpg/275px-%D0%91%D1%83%D0%B4%D0%B8%D0%BD%D0%BE%D0%BA_%D0%BA%D0%BE%D0%BB%D0%B8%D1%88%D0%BD%D1%8C%D0%BE%D1%97_%D0%A5%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%BC%D1%96%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%B4%D1%83%D0%BC%D0%B8_%28%D0%BC%D1%83%D1%80.%29.jpg")
+
     # ukrainian
     bot.send_message(message.chat.id, "Українська мова🇺🇦")
     bot.send_message(message.chat.id, "Це альфа версія Вікіпедії бота! Якщо будуть якісь помилки, пишіть @ShDmytros")
@@ -86,7 +88,13 @@ def message_handler(message):
     if "None" in data_info:
         bot.send_message(message.chat.id, "Інформацію не знайдено!" if language == "ua" else "Information not found!")
     else:
-        bot.send_message(message.chat.id, text=data_info)
+        data_photo: str = str(data.photo)
+
+        if not data.photo:
+            bot.send_message(message.chat.id, text=data_info)
+        else:
+            bot.send_message(message.chat.id, text=data_info)
+            bot.send_photo(message.chat.id, data_photo)
 
 
 bot.polling(non_stop=True)
