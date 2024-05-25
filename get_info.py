@@ -79,8 +79,6 @@ class parsing:
 
         photo_link = re.findall(r'".+"', photo)
 
-        print("photo_link:", photo_link)
-
         for photo_link in photo_link:
             photo_link = photo_link
 
@@ -90,19 +88,13 @@ class parsing:
             for photo_link in photo_link:
                 photo_link = photo_link
 
-            print(photo_link)
-
             clear_photo_link = re.sub(r'"', '', photo_link)
             clear_photo_link = re.sub(r'src=', '', clear_photo_link)
 
         else:
             clear_photo_link = re.sub(r'"', '', photo_link)
 
-        print("clear_photo_link", clear_photo_link)
-
         clear_photo_link = re.sub(r" .+", "", clear_photo_link)
-
-        print(clear_photo_link)
 
         # clear_photo_link = re.sub(r".+ ")
         clear_photo_link = "https:" + clear_photo_link
