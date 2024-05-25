@@ -75,7 +75,7 @@ class parsing:
         return clean_information + "\n" + self.new_url
 
     def parse_photo(self) -> str:
-        photo: str = str(self.selector.css('.infobox img').get(['src']))
+        photo: str = str(self.selector.css('.mw-body-content img').get(['src']))
 
         photo_link = re.findall(r'".+"', photo)
 
