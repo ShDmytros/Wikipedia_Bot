@@ -10,7 +10,7 @@ from key_user_agent import user_agent
 
 
 class parsing:
-    def __init__(self, text, lang):
+    def __init__(self, text, lang) -> None:
         self.text = text
         self.lang = lang
         if self.lang == "ua":
@@ -27,6 +27,7 @@ class parsing:
         self.html: Response = requests.get(self.new_url)
         self.selector = Selector(text=self.response.text)
         self.data_list = self.parse()
+        self.photo = self.parse_photo()
 
     def make_request(self) -> Response:
         return requests.get(url=self.new_url, headers=self.headers)
@@ -60,9 +61,10 @@ class parsing:
     #
     #     return base_information
 
-    def information(self):
+    def information(self) -> str:
         if self.lang == "ua":
             information: str = str(self.selector.xpath('//*[@id="mw-content-text"]/div[1]/p[1]').get())
+
         elif self.lang == "en":
             information: str = str(self.selector.xpath('//*[@id="mw-content-text"]/div[1]/p[2]').get())
 
@@ -72,8 +74,57 @@ class parsing:
 
         return clean_information + "\n" + self.new_url
 
+    def parse_photo(self) -> str:
+        photo: str = str(self.selector.css('img').get(['src']))
+
+        photo_link = re.findall(r'".+"', photo)
+
+        print("photo_link:", photo_link)
+
+        for photo_link in photo_link:
+            photo_link = photo_link
+
+        if "src=" in photo_link:
+            photo_link = re.findall(r'src=".+', photo_link)
+
+            for photo_link in photo_link:
+                photo_link = photo_link
+
+            print(photo_link)
+
+            clear_photo_link = re.sub(r'"', '', photo_link)
+            clear_photo_link = re.sub(r'src=', '', clear_photo_link)
+
+        else:
+            clear_photo_link = re.sub(r'"', '', photo_link)
+
+        print("clear_photo_link", clear_photo_link)
+
+        clear_photo_link = re.sub(r" .+", "", clear_photo_link)
+
+        print(clear_photo_link)
+
+        # clear_photo_link = re.sub(r".+ ")
+        clear_photo_link = "https:" + clear_photo_link
+
+        return clear_photo_link
+
     def parse(self) -> str:
         # print(self.selector.type)
         # final_list = "right_menu" + str(self.right_menu()) + "information" + str(self.information())
         final_list = str(self.information())
         return final_list
+
+
+def main():
+    data = parsing(text="Дублін", lang="ua")
+
+    data_info: str = str(data.data_list)
+    data_photo: str = str(data.photo)
+
+    print(data_info)
+    print(data_photo)
+
+
+if __name__ == "__main__":
+    main()
