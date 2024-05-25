@@ -75,13 +75,22 @@ def en(lang):
 @bot.message_handler(content_types=["text"])
 def message_handler(message):
     if language == "ua":
+        bot.send_message(message.chat.id, "Трохи зачекайте, йде пошук інформації.")
+        bot.send_message(message.chat.id, "🔎")
+
         data = parsing(text=message.text, lang="ua")
+
     elif language == "en":
+        bot.send_message(message.chat.id, "Please wait a moment, we are searching for information.")
+        bot.send_message(message.chat.id, "🔎")
+
         data = parsing(text=message.text, lang="en")
+
     else:
         bot.send_message(message.chat.id, "Будь ласка, спочатку оберіть мову командою /start.")
         bot.send_message(message.chat.id, "Please first select the language with the /start command.")
         return
+
 
     data_info: str = str(data.data_list)
 
