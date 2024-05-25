@@ -15,10 +15,10 @@ class parsing:
         self.lang = lang
         if self.lang == "ua":
             self.url: str = "https://uk.wikipedia.org/wiki"
-            # print("Ukrainian")
+
         elif self.lang == "en":
             self.url: str = "https://en.wikipedia.org/wiki"
-            # print("English")
+
         self.new_url: str = self.url + "/" + self.text
 
         self.headers = self.get_headers()
