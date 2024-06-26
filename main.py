@@ -91,9 +91,6 @@ def message_handler(message):
     data_info: str = data.data_list if data and hasattr(data, "data_list") else None
     data_photo: str = data.photo if data and hasattr(data, "photo") else None
 
-    # print(data_info)
-    print(data_photo)
-
     if "None" in data_info:
         bot.send_message(message.chat.id, "Інформацію не знайдено!" if language == "ua" else "Information not found!")
     else:
