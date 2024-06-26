@@ -3,8 +3,6 @@ from data.my_key import key
 import telebot
 from telebot import types
 
-from colorama import Fore
-
 # pip install pyTelegramBotAPI
 
 
