@@ -37,30 +37,6 @@ class parsing:
             'user-agent': str(random.sample(user_agent, 32))
         }
 
-    # def right_menu(self):
-    #     base_information = {}
-    #
-    #     base_information_main = self.selector.css('table.infobox tbody tr th::text').getall()
-    #
-    #     # print(base_information_main)
-    #     # for clear_index in range(len(base_information_main)):
-    #     #     print(clear_index)
-    #     #     if '\n' in base_information_main[clear_index]:
-    #     #         base_information_main[clear_index] = re.sub('\n', '', base_information_main[clear_index])
-    #     #         if base_information_main[clear_index] == '':
-    #     #             base_information_main.pop(clear_index)
-    #     #             print(base_information_main)
-    #
-    #     # print(base_information_main)
-    #
-    #     base_information_info = self.selector.css('table.infobox tbody tr td::text').getall()
-    #     # base_information_info = re.sub(r'\d+')
-    #
-    #     for base_main, base_info in zip(base_information_main, base_information_info):
-    #         base_information[base_main] = base_info
-    #
-    #     return base_information
-
     def information(self) -> str:
         if self.lang == "ua":
             information: str = str(self.selector.xpath('//*[@id="mw-content-text"]/div[1]/p[1]').get())
@@ -102,8 +78,6 @@ class parsing:
         return clear_photo_link
 
     def parse(self) -> str:
-        # print(self.selector.type)
-        # final_list = "right_menu" + str(self.right_menu()) + "information" + str(self.information())
         final_list = str(self.information())
         return final_list
 

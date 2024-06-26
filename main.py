@@ -3,11 +3,13 @@ from data.my_key import key
 import telebot
 from telebot import types
 
+from colorama import Fore
+
 # pip install pyTelegramBotAPI
 
 
 bot = telebot.TeleBot(key)
-language = None
+user_language = {}
 
 
 @bot.message_handler(commands=['start'])
@@ -17,8 +19,6 @@ def welcome(message):
     item2 = types.KeyboardButton("/ukrainian")
     item3 = types.KeyboardButton("/english")
     markup.add(item1, item2, item3)
-
-    # bot.send_photo(message.chat.id, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/%D0%91%D1%83%D0%B4%D0%B8%D0%BD%D0%BE%D0%BA_%D0%BA%D0%BE%D0%BB%D0%B8%D1%88%D0%BD%D1%8C%D0%BE%D1%97_%D0%A5%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%BC%D1%96%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%B4%D1%83%D0%BC%D0%B8_%28%D0%BC%D1%83%D1%80.%29.jpg/275px-%D0%91%D1%83%D0%B4%D0%B8%D0%BD%D0%BE%D0%BA_%D0%BA%D0%BE%D0%BB%D0%B8%D1%88%D0%BD%D1%8C%D0%BE%D1%97_%D0%A5%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%BC%D1%96%D1%81%D1%8C%D0%BA%D0%BE%D1%97_%D0%B4%D1%83%D0%BC%D0%B8_%28%D0%BC%D1%83%D1%80.%29.jpg")
 
     # ukrainian
     bot.send_message(message.chat.id, "Українська мова🇺🇦")
@@ -44,6 +44,8 @@ def welcome(message):
 
 @bot.message_handler(commands=['ukrainian'])
 def ua(lang):
+    user_language[lang.chat.id] = "ua"
+
     bot.send_message(lang.chat.id,
                      'Ви обрали українську мову🇺🇦, якщо Ви хочете змінити мову, напишіть команду /start та поторіть '
                      'все зпочатку. ')
@@ -51,29 +53,26 @@ def ua(lang):
                                    'Андежелес" або "Херсон" P.S: якщо те, що Ви шукаєте складаєть більше ніж з одного '
                                    'слова,'
                                    'до прикладу "Лос Анджелес", то пишіть це через нижнє підкреслювання, приклад '
-                                   '"Лос_Анджелес" або'
-                                   '"Лос-Анджелес"')
-
-    global language
-    language = "ua"
+                                   '"Лос_Анджелес"')
 
 
 @bot.message_handler(commands=['english'])
 def en(lang):
+    user_language[lang.chat.id] = "en"
+
     bot.send_message(lang.chat.id,
                      'You have chosen English language🇬🇧, if you want to change the language, write the command '
                      '/start and start over.')
     bot.send_message(lang.chat.id, 'Now write what you want to find, e.g. ‘Los Angeles’ or ‘Kherson’ P.S.: '
                                    'if what you are looking for is more than one word, ‘e.g. “Los Angeles”, '
                                    'then write it with'
-                                   'lowercase underscores, e.g. “Los_Angeles” or “Los Angeles”')
-
-    global language
-    language = "en"
+                                   'lowercase underscores, e.g. “Los_Angeles”')
 
 
 @bot.message_handler(content_types=["text"])
 def message_handler(message):
+    language = user_language.get(message.chat.id)
+
     if language == "ua":
         bot.send_message(message.chat.id, "Трохи зачекайте, йде пошук інформації.")
         bot.send_message(message.chat.id, "🔎")
@@ -91,18 +90,18 @@ def message_handler(message):
         bot.send_message(message.chat.id, "Please first select the language with the /start command.")
         return
 
+    data_info: str = data.data_list if data and hasattr(data, "data_list") else None
+    data_photo: str = data.photo if data and hasattr(data, "photo") else None
 
-    data_info: str = str(data.data_list)
+    # print(data_info)
+    print(data_photo)
 
     if "None" in data_info:
         bot.send_message(message.chat.id, "Інформацію не знайдено!" if language == "ua" else "Information not found!")
     else:
-        data_photo: str = str(data.photo)
+        bot.send_message(message.chat.id, text=data_info)
 
-        if not data.photo:
-            bot.send_message(message.chat.id, text=data_info)
-        else:
-            bot.send_message(message.chat.id, text=data_info)
+        if "None" not in data_photo:
             bot.send_photo(message.chat.id, data_photo)
 
 
