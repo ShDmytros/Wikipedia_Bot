@@ -11,6 +11,7 @@ from key_user_agent import user_agent
 
 class parsing:
     def __init__(self, text, lang) -> None:
+        text = re.sub(" ", "_", text)
         self.text = text
         self.lang = lang
         if self.lang == "ua":
@@ -82,15 +83,15 @@ class parsing:
         return final_list
 
 
-def main():
-    data = parsing(text="Львів", lang="ua")
-
-    data_info: str = str(data.data_list)
-    data_photo: str = str(data.photo)
-
-    print(data_info)
-    print(data_photo)
-
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     data = parsing(text="Лос Анджелес", lang="ua")
+#
+#     data_info: str = str(data.data_list)
+#     data_photo: str = str(data.photo)
+#
+#     print(data_info)
+#     print(data_photo)
+#
+#
+# if __name__ == "__main__":
+#     main()
