@@ -21,6 +21,7 @@ def welcome(message):
     # ukrainian
     bot.send_message(message.chat.id, "Українська мова🇺🇦")
     bot.send_message(message.chat.id, "Це альфа версія Вікіпедії бота! Якщо будуть якісь помилки, пишіть @ShDmytros")
+    bot.send_message(message.chat.id, "Автор: Дмитро Штучка")
     bot.send_message(message.chat.id,
                      "1.Доступна лише українська мова🇺🇦 та англійська мова🇬🇧, з будь якими іншими мовами бот "
                      "працювати не буде!\n\n2.Пишіть обов'язково коректно.")
@@ -32,6 +33,7 @@ def welcome(message):
     bot.send_message(message.chat.id, "English language🇬🇧")
     bot.send_message(message.chat.id, "This is an alpha version of the bot's Wikipedia! If there are any errors, "
                                       "write to @ShDmytros")
+    bot.send_message(message.chat.id, "Author: Dmytro Shtuchka")
     bot.send_message(message.chat.id,
                      "1.Only Ukrainian🇺🇦 and English🇬🇧 are available, with any other languages the bot"
                      "will not work!\n\n2.Be sure to write correctly.")
@@ -47,11 +49,8 @@ def ua(lang):
     bot.send_message(lang.chat.id,
                      'Ви обрали українську мову🇺🇦, якщо Ви хочете змінити мову, напишіть команду /start та поторіть '
                      'все зпочатку. ')
-    bot.send_message(lang.chat.id, 'Тепер напишіть, що Ви хочете знайти, до прикладу "Лос '
-                                   'Андежелес" або "Херсон" P.S: якщо те, що Ви шукаєте складаєть більше ніж з одного '
-                                   'слова,'
-                                   'до прикладу "Лос Анджелес", то пишіть це через нижнє підкреслювання, приклад '
-                                   '"Лос_Анджелес"')
+    bot.send_message(lang.chat.id, 'Тепер напишіть, що Ви хочете знайти, до прикладу "Лос Андежелес", "Львів", '
+                                   'Нюй Йорк, "Херсон" тощо')
 
 
 @bot.message_handler(commands=['english'])
@@ -61,10 +60,8 @@ def en(lang):
     bot.send_message(lang.chat.id,
                      'You have chosen English language🇬🇧, if you want to change the language, write the command '
                      '/start and start over.')
-    bot.send_message(lang.chat.id, 'Now write what you want to find, e.g. ‘Los Angeles’ or ‘Kherson’ P.S.: '
-                                   'if what you are looking for is more than one word, ‘e.g. “Los Angeles”, '
-                                   'then write it with'
-                                   'lowercase underscores, e.g. “Los_Angeles”')
+    bot.send_message(lang.chat.id, 'Now write down what you want to find, for example, "Los Angeles", "Lviv", '
+                                   '"New York", "Kherson", etc.')
 
 
 @bot.message_handler(content_types=["text"])
@@ -78,7 +75,7 @@ def message_handler(message):
         data = parsing(text=message.text, lang="ua")
 
     elif language == "en":
-        bot.send_message(message.chat.id, "Please wait a moment, we are searching for information.")
+        bot.send_message(message.chat.id, "Please wait a moment, the bot is searching for information.")
         bot.send_message(message.chat.id, "🔎")
 
         data = parsing(text=message.text, lang="en")
