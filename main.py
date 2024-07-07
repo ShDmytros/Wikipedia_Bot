@@ -20,7 +20,7 @@ def welcome(message):
 
     # ukrainian
     bot.send_message(message.chat.id, "Українська мова🇺🇦")
-    bot.send_message(message.chat.id, "Це альфа версія Вікіпедії бота! Якщо будуть якісь помилки, пишіть @ShDmytros")
+    bot.send_message(message.chat.id, "Це версія 2.0 Вікіпедії бота! Якщо будуть якісь помилки, пишіть @ShDmytros")
     bot.send_message(message.chat.id, "Автор: Дмитро Штучка")
     bot.send_message(message.chat.id,
                      "1.Доступна лише українська мова🇺🇦 та англійська мова🇬🇧, з будь якими іншими мовами бот "
@@ -31,7 +31,7 @@ def welcome(message):
 
     # english
     bot.send_message(message.chat.id, "English language🇬🇧")
-    bot.send_message(message.chat.id, "This is an alpha version of the bot's Wikipedia! If there are any errors, "
+    bot.send_message(message.chat.id, "This is a version 2.0 of the bot's Wikipedia! If there are any errors, "
                                       "write to @ShDmytros")
     bot.send_message(message.chat.id, "Author: Dmytro Shtuchka")
     bot.send_message(message.chat.id,
@@ -49,8 +49,8 @@ def ua(lang):
     bot.send_message(lang.chat.id,
                      'Ви обрали українську мову🇺🇦, якщо Ви хочете змінити мову, напишіть команду /start та поторіть '
                      'все зпочатку. ')
-    bot.send_message(lang.chat.id, 'Тепер напишіть, що Ви хочете знайти, до прикладу "Лос Андежелес", "Львів", '
-                                   'Нюй Йорк, "Херсон" тощо')
+    bot.send_message(lang.chat.id, 'Тепер напишіть, що Ви хочете знайти, до прикладу "Лос Анджелес", "Наполеонівські війни", '
+                                   'Собаки, "Херсон", "Львів" тощо.')
 
 
 @bot.message_handler(commands=['english'])
@@ -60,8 +60,8 @@ def en(lang):
     bot.send_message(lang.chat.id,
                      'You have chosen English language🇬🇧, if you want to change the language, write the command '
                      '/start and start over.')
-    bot.send_message(lang.chat.id, 'Now write down what you want to find, for example, "Los Angeles", "Lviv", '
-                                   '"New York", "Kherson", etc.')
+    bot.send_message(lang.chat.id, 'Now write down what you want to find, for example, "Los Angeles", "Napoleonic Wars", '
+                                   '"Dogs", "Kherson", "Lviv", etc.')
 
 
 @bot.message_handler(content_types=["text"])
