@@ -5,4 +5,8 @@ A bot that crawls Wikipedia and provides the result in Telegram
 
 ---------------------------
 
+Link: https://t.me/small_wikipedia_bot
+
+---------------------------
+
 pip install pyTelegramBotAPI, parsel, requests
