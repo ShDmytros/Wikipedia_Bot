@@ -1,8 +1,7 @@
+import telebot, time
 from get_info import parsing
 from data.my_key import key
-import telebot
 from telebot import types
-
 # pip install pyTelegramBotAPI
 
 
@@ -49,7 +48,8 @@ def ua(lang):
     bot.send_message(lang.chat.id,
                      'Ви обрали українську мову🇺🇦, якщо Ви хочете змінити мову, напишіть команду /start та поторіть '
                      'все зпочатку. ')
-    bot.send_message(lang.chat.id, 'Тепер напишіть, що Ви хочете знайти, до прикладу "Лос Анджелес", "Наполеонівські війни", '
+    bot.send_message(lang.chat.id, 'Тепер напишіть, що Ви хочете знайти, до прикладу "Лос Анджелес", "Наполеонівські '
+                                   'війни",'
                                    'Собаки, "Херсон", "Львів" тощо.')
 
 
@@ -60,7 +60,8 @@ def en(lang):
     bot.send_message(lang.chat.id,
                      'You have chosen English language🇬🇧, if you want to change the language, write the command '
                      '/start and start over.')
-    bot.send_message(lang.chat.id, 'Now write down what you want to find, for example, "Los Angeles", "Napoleonic Wars", '
+    bot.send_message(lang.chat.id, 'Now write down what you want to find, for example, "Los Angeles", "Napoleonic '
+                                   'Wars",'
                                    '"Dogs", "Kherson", "Lviv", etc.')
 
 
@@ -97,4 +98,9 @@ def message_handler(message):
             bot.send_photo(message.chat.id, data_photo)
 
 
-bot.polling(non_stop=True)
+while True:
+    try:
+        bot.polling(non_stop=True)
+    except Exception as e:
+        print(f"Помилка: {e}")
+        time.sleep(15)  # Почекати 15 секунд і знову запустити

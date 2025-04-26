@@ -20,7 +20,7 @@ class parsing:
         elif self.lang == "en":
             self.url: str = "https://en.wikipedia.org/wiki"
 
-        self.new_url: str = self.url + "/" + self.text
+        self.new_url: str = self.url + "/" + self.text #https://en.wikipedia.org/wiki/Los_Angeles
 
         self.headers = self.get_headers()
         self.response: Response = self.make_request()
