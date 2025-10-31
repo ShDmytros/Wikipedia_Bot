@@ -1,6 +1,7 @@
 # Wikipedia Parser Bot
 
 ### _Bot that works with own parsing method_
+### Give it a try: https://t.me/small_wikipedia_bot
 
 ## Description
 
@@ -30,5 +31,6 @@ The bot allows users to quickly access facts, text excerpts, or article structur
 - Quick information search via Telegram
 
 - Runs in a Docker container for easy deployment
+
 
 - Have English and Ukrainian languages
