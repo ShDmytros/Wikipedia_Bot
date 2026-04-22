@@ -43,7 +43,7 @@ class parsing:
             information: str = str(self.selector.xpath('//*[@id="mw-content-text"]/div[1]/p[1]').get())
 
         elif self.lang == "en":
-            information: str = str(self.selector.xpath('//*[@id="mw-content-text"]/div[1]/p[2]').get())
+            information: str = str(self.selector.xpath('//*[@id="mw-content-text"]/div[2]/p[2]').get())
 
         information: Selector = Selector(text=information)
         clean_information = information.xpath('string()').extract_first()
@@ -84,14 +84,14 @@ class parsing:
 
 
 # def main():
-#     data = parsing(text="Лос Анджелес", lang="ua")
-#
+#     data = parsing(text="Los Angeles", lang="en")
+
 #     data_info: str = str(data.data_list)
 #     data_photo: str = str(data.photo)
-#
+
 #     print(data_info)
 #     print(data_photo)
-#
-#
+
+
 # if __name__ == "__main__":
 #     main()
